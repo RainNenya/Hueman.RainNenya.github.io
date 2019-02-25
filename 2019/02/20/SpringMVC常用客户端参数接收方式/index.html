@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>SpringMVC常用客户端参数接收方式 | RainNenya</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Spring,SpringMVC">
+    
+    <meta name="description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+<meta name="keywords" content="Spring,SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC常用客户端参数接收方式">
+<meta property="og:url" content="http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/index.html">
+<meta property="og:site_name" content="RainNenya">
+<meta property="og:description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg">
+<meta property="og:updated_time" content="2019-02-25T13:54:58.198Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC常用客户端参数接收方式">
+<meta name="twitter:description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RainNenya" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?adc2a5395e377d9f9eac2222ebfe460c";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Java/">Java</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Java/">Java</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-SpringMVC常用客户端参数接收方式" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        SpringMVC常用客户端参数接收方式
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="article-date">
+            <time datetime="2019-02-20T13:28:13.795Z" itemprop="datePublished">2019-02-20</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/SpringMVC/">SpringMVC</a>
+    </div>
+
+				阅读数量:<span id="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="leancloud_visitors" data-flag-title="SpringMVC常用客户端参数接收方式"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="Spring-MVC常用客户端参数接收方式"><a href="#Spring-MVC常用客户端参数接收方式" class="headerlink" title="Spring MVC常用客户端参数接收方式"></a>Spring MVC常用客户端参数接收方式</h2><p><img src="/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg" alt="Spring"></p>
+<p>在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。</p>
+<a id="more"></a>
+<p>Book实体类<code>Book.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer bookId;</span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line">	<span class="comment">//生成Get、Set方法，此处省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一、直接用参数名匹配请求参数"><a href="#一、直接用参数名匹配请求参数" class="headerlink" title="一、直接用参数名匹配请求参数"></a>一、直接用参数名匹配请求参数</h3><p>客户端界面（表单）:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/queryString"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"bookId"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"author"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/queryString"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test1</span><span class="params">(Integer bookId, String author)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId="</span>+bookId+<span class="string">", author="</span>+author);</span><br><span class="line">        <span class="comment">//此处返回的地址为（/WEB-INF/jsp/index.jsp）</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：这里<code>@RequestMapping</code>中只有value属性，value可以省略不写。</p>
+<p>客户端输入：123,Rose</p>
+<p>控制台输出：bookId=123, author=Rose</p>
+<h3 id="二、通过-RequestParam注解来指定请求参数的name"><a href="#二、通过-RequestParam注解来指定请求参数的name" class="headerlink" title="二、通过@RequestParam注解来指定请求参数的name"></a>二、通过@RequestParam注解来指定请求参数的name</h3><p>客户端界面（表单）:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/queryStringWithSpecName"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"bookId"</span> <span class="attr">value</span>=<span class="string">"321"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"author"</span> <span class="attr">value</span>=<span class="string">"Jack"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>如果表单中的字段与方法中的参数名一致，可以不需要@RequestParam，Spring会自动处理。</strong></p>
+</blockquote>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryStringWithSpecName"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test2</span><span class="params">((value=<span class="string">"bookId"</span>,required=<span class="keyword">false</span>)</span> Integer id, @<span class="title">RequestParam</span><span class="params">(<span class="string">"author"</span>)</span> String name) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId="</span>+id+<span class="string">", author="</span>+name);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：这里<code>@RequestMapping</code>中有两个属性，value不能省略。</p>
+<blockquote>
+<p>@RequestParam将请求地址中的参数传递给目标方法，在处理方法入参处使用可以把请求参数传递给请求方法。</p>
+</blockquote>
+<p>当使用@RequestParam注解时，设置客户端传递的请求参数<code>name=&quot;bookId&quot;</code>和@RequestParam的value值<code>value=&quot;bookId&quot;</code>相匹配后，参数名<code>int id</code>可以和请求参数不匹配。</p>
+<p>客户端输入：321, Jack</p>
+<p>控制台输出：bookId=321, author=Jack</p>
+<hr>
+<p>客户端界面（ajax）:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick="clickMe()"&gt;点我&lt;/button&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function">function <span class="title">clickMe</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">            type : <span class="string">'POST'</span>,</span><br><span class="line">            url : <span class="string">"/queryStringWithSpecName"</span>,</span><br><span class="line">            data : &#123;</span><br><span class="line">                <span class="string">"bookId"</span> : <span class="number">1</span>,</span><br><span class="line">                <span class="string">"author"</span> : <span class="string">"Jack"</span></span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>controller层：（不变）</p>
+<p>客户端: data:{“author” : “Jack”}</p>
+<p>控制台输出: bookId=null, author=Jack（如果bookId为int类型，控制台会抛出异常）</p>
+<p>客户端: data:{“bookId” : 1}</p>
+<p>控制台输出: org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter ‘author’ is not present</p>
+<p>通过<code>required</code>设置可选参数，<code>required</code>为<code>false</code>时表示可以不带参数，为<code>true</code>时表示必须带参数（默认值为true）。</p>
+<blockquote>
+<p>当可选参数不存在时，Spring默认将其赋值为空（null），但由于bookId已定义为基本类型int，所以赋值会失败。<strong>解决方法：采用int包装类Integer。</strong></p>
+</blockquote>
+<h3 id="三、使用领域对象来接收参数"><a href="#三、使用领域对象来接收参数" class="headerlink" title="三、使用领域对象来接收参数"></a>三、使用领域对象来接收参数</h3><p>客户端界面（表单）:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/queryStringWithDomainObj"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"bookId"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"author"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryStringWithDomainObj"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test3</span><span class="params">(Book book)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId="</span>+book.getBookId()+<span class="string">", author="</span>+book.getAuthor());</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>客户端输入：111, Bob</p>
+<p>控制台输出：bookId=111, author=Bob</p>
+<h3 id="四、URL动态参数传递（路径参数）"><a href="#四、URL动态参数传递（路径参数）" class="headerlink" title="四、URL动态参数传递（路径参数）"></a>四、URL动态参数传递（路径参数）</h3><p>客户端界面（超链接）:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/book/1"</span>&gt;</span>testPathVariable<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//@PathVariable可以用来映射URL中的占位符到目标方法的参数中</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/book/&#123;bookId&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test4</span><span class="params">(@PathVariable(<span class="string">"bookId"</span>)</span> Integer bookId) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId:"</span> + bookId);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：bookId:1</p>
+<p><strong>@PathVariable 映射 URL 绑定的占位符</strong></p>
+<blockquote>
+<p>通过 @PathVariable 可以将 URL 中占位符参数绑定到控制器处理方法的入参中：URL 中的 {xxx} 占位符可以通过@PathVariable(“xxx“) 绑定到操作方法的入参中。</p>
+</blockquote>
+<h3 id="五、使用HttpServletRequest获取请求参数"><a href="#五、使用HttpServletRequest获取请求参数" class="headerlink" title="五、使用HttpServletRequest获取请求参数"></a>五、使用HttpServletRequest获取请求参数</h3><p>客户端界面（表单）:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/queryBook"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"bookId"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"author"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryBook"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test5</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId:"</span> + request.getParameter(<span class="string">"bookId"</span>));</span><br><span class="line">        <span class="comment">//此处index.jsp界面在WEB-INF下</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/index.jsp"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>客户端输入：123</p>
+<p>控制台输出：用户id:123</p>
+<h3 id="六、跳转到另一个controller方法"><a href="#六、跳转到另一个controller方法" class="headerlink" title="六、跳转到另一个controller方法"></a>六、跳转到另一个controller方法</h3><p>客户端界面（url地址栏）:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/test6?bookId=321</span><br></pre></td></tr></table></figure>
+<p>controller层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/test6"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test6</span><span class="params">(String bookId)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId="</span>+bookId);</span><br><span class="line">        <span class="comment">//使用服务端跳转的方式转向到另一个controller</span></span><br><span class="line">        <span class="comment">//return "forward:queryBook?bookId="+bookId;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:queryUser?bookId="</span>+bookId;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：bookId=321    bookId:321</p>
+
+        </div>		
+        <footer class="article-footer">
+			<!-- ������City�氲װ���� -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MjY2MS8xOTIwOA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Ϊ����ʹ�����������۹����뼤��JavaScript</noscript>
+</div>
+<!-- City�氲װ��������� -->
+            
+
+
+
+    <a data-url="http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/" data-id="cjsketopn0002kgo0mhbmcd0z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Percy"
+        },
+        "headline": "SpringMVC常用客户端参数接收方式",
+        "image": "http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg",
+        "keywords": "Spring SpringMVC",
+        "genre": "日常技术 Java",
+        "datePublished": "2019-02-20",
+        "dateCreated": "2019-02-20",
+        "dateModified": "2019-02-25",
+        "url": "http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/",
+        "description": "Spring MVC常用客户端参数接收方式
+在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。"
+        "wordCount": 1030
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RainNenya" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/02/19/分页插件PageHelper/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">分页插件PageHelper</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC常用客户端参数接收方式"><span class="toc-number">1.</span> <span class="toc-text">Spring MVC常用客户端参数接收方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、直接用参数名匹配请求参数"><span class="toc-number">1.1.</span> <span class="toc-text">一、直接用参数名匹配请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、通过-RequestParam注解来指定请求参数的name"><span class="toc-number">1.2.</span> <span class="toc-text">二、通过@RequestParam注解来指定请求参数的name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、使用领域对象来接收参数"><span class="toc-number">1.3.</span> <span class="toc-text">三、使用领域对象来接收参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、URL动态参数传递（路径参数）"><span class="toc-number">1.4.</span> <span class="toc-text">四、URL动态参数传递（路径参数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、使用HttpServletRequest获取请求参数"><span class="toc-number">1.5.</span> <span class="toc-text">五、使用HttpServletRequest获取请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、跳转到另一个controller方法"><span class="toc-number">1.6.</span> <span class="toc-text">六、跳转到另一个controller方法</span></a></li></ol></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="title">SpringMVC常用客户端参数接收方式</a></p>
+                            <p class="item-date"><time datetime="2019-02-20T13:28:13.795Z" itemprop="datePublished">2019-02-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/19/分页插件PageHelper/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/19/分页插件PageHelper/PageHelper.png)" alt="分页插件PageHelper" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/19/分页插件PageHelper/" class="title">分页插件PageHelper</a></p>
+                            <p class="item-date"><time datetime="2019-02-19T01:09:02.351Z" itemprop="datePublished">2019-02-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/枚举的使用示例/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/17/枚举的使用示例/enum.png)" alt="枚举的使用示例" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/17/枚举的使用示例/" class="title">枚举的使用示例</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T03:46:25.562Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/16/Java的8中基本数据类型/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/16/Java的8中基本数据类型/DataType.png)" alt="Java的8中基本数据类型" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/16/Java的8中基本数据类型/" class="title">Java的8中基本数据类型</a></p>
+                            <p class="item-date"><time datetime="2019-02-16T06:07:03.084Z" itemprop="datePublished">2019-02-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/27/初识Java多线程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg)" alt="初识Java多线程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/01/27/初识Java多线程/" class="title">初识Java多线程</a></p>
+                            <p class="item-date"><time datetime="2019-01-27T13:40:00.203Z" itemprop="datePublished">2019-01-27</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+	    <!--����������Ҫд������-->
+			<p>Jaberrwock123@163.com</p>
+        </div>
+    </div>
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 Percy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+				<!--这一段是不蒜子的访问量统计代码-->
+				<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+				<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+				<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'pm9u6h9hfnT5JN9NSeMz6rL6-gzGzoHsz';
+    var APP_KEY = 'Wm7UyiX8pKMulgaoBRi164yd';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
