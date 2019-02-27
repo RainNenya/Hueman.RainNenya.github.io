@@ -12,20 +12,20 @@
     
         <meta name="keywords" content="Spring,SpringMVC">
     
-    <meta name="description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+    <meta name="description" content="在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
 <meta name="keywords" content="Spring,SpringMVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC常用客户端参数接收方式">
 <meta property="og:url" content="http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/index.html">
 <meta property="og:site_name" content="RainNenya">
-<meta property="og:description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+<meta property="og:description" content="在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg">
-<meta property="og:updated_time" content="2019-02-25T13:54:58.198Z">
+<meta property="og:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg">
+<meta property="og:updated_time" content="2019-02-27T09:52:04.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC常用客户端参数接收方式">
-<meta name="twitter:description" content="Spring MVC常用客户端参数接收方式 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
-<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg">
+<meta name="twitter:description" content="在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg">
     
 
     
@@ -184,7 +184,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="Spring-MVC常用客户端参数接收方式"><a href="#Spring-MVC常用客户端参数接收方式" class="headerlink" title="Spring MVC常用客户端参数接收方式"></a>Spring MVC常用客户端参数接收方式</h2><p><img src="/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg" alt="Spring"></p>
+            <p><img src="/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg" alt="SpringMVC"></p>
 <p>在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。</p>
 <a id="more"></a>
 <p>Book实体类<code>Book.java</code></p>
@@ -203,7 +203,7 @@
 </blockquote>
 <p>controller层：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamPassDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryStringWithSpecName"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test2</span><span class="params">((value=<span class="string">"bookId"</span>,required=<span class="keyword">false</span>)</span> Integer id, @<span class="title">RequestParam</span><span class="params">(<span class="string">"author"</span>)</span> String name) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookId="</span>+id+<span class="string">", author="</span>+name);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：这里<code>@RequestMapping</code>中有两个属性，value不能省略。</p>
+<p>注意：这里<code>@RequestParam</code>中有两个属性，value不能省略。</p>
 <blockquote>
 <p>@RequestParam将请求地址中的参数传递给目标方法，在处理方法入参处使用可以把请求参数传递给请求方法。</p>
 </blockquote>
@@ -273,7 +273,7 @@
 
 
 
-    <a data-url="http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/" data-id="cjsketopn0002kgo0mhbmcd0z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/" data-id="cjsn1lx8k000274o0f1fxyr17" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -344,16 +344,16 @@
             "name": "Percy"
         },
         "headline": "SpringMVC常用客户端参数接收方式",
-        "image": "http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg",
+        "image": "http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg",
         "keywords": "Spring SpringMVC",
         "genre": "日常技术 Java",
         "datePublished": "2019-02-20",
         "dateCreated": "2019-02-20",
-        "dateModified": "2019-02-25",
+        "dateModified": "2019-02-27",
         "url": "http://RainNenya.github.io/2019/02/20/SpringMVC常用客户端参数接收方式/",
-        "description": "Spring MVC常用客户端参数接收方式
+        "description": "
 在MVC结构中，控制器组件主要的功能就是接收请求、处理请求、生成响应，接收客户端传来的请求参数的往往是控制器要做的第一件事。"
-        "wordCount": 1030
+        "wordCount": 1024
     }
 </script>
 
@@ -400,6 +400,16 @@
         
 <nav id="article-nav">
     
+        <a href="/2019/02/27/初识Hibernate/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            初识Hibernate
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
     
         <a href="/2019/02/19/分页插件PageHelper/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
@@ -418,7 +428,7 @@
     <h3 class="widget-title">目录</h3>
     <div class="widget">
         <div id="toc" class="toc-article">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC常用客户端参数接收方式"><span class="toc-number">1.</span> <span class="toc-text">Spring MVC常用客户端参数接收方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、直接用参数名匹配请求参数"><span class="toc-number">1.1.</span> <span class="toc-text">一、直接用参数名匹配请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、通过-RequestParam注解来指定请求参数的name"><span class="toc-number">1.2.</span> <span class="toc-text">二、通过@RequestParam注解来指定请求参数的name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、使用领域对象来接收参数"><span class="toc-number">1.3.</span> <span class="toc-text">三、使用领域对象来接收参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、URL动态参数传递（路径参数）"><span class="toc-number">1.4.</span> <span class="toc-text">四、URL动态参数传递（路径参数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、使用HttpServletRequest获取请求参数"><span class="toc-number">1.5.</span> <span class="toc-text">五、使用HttpServletRequest获取请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、跳转到另一个controller方法"><span class="toc-number">1.6.</span> <span class="toc-text">六、跳转到另一个controller方法</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、直接用参数名匹配请求参数"><span class="toc-number">1.</span> <span class="toc-text">一、直接用参数名匹配请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、通过-RequestParam注解来指定请求参数的name"><span class="toc-number">2.</span> <span class="toc-text">二、通过@RequestParam注解来指定请求参数的name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、使用领域对象来接收参数"><span class="toc-number">3.</span> <span class="toc-text">三、使用领域对象来接收参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、URL动态参数传递（路径参数）"><span class="toc-number">4.</span> <span class="toc-text">四、URL动态参数传递（路径参数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、使用HttpServletRequest获取请求参数"><span class="toc-number">5.</span> <span class="toc-text">五、使用HttpServletRequest获取请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、跳转到另一个controller方法"><span class="toc-number">6.</span> <span class="toc-text">六、跳转到另一个controller方法</span></a></li></ol>
         </div>
     </div>
 </div>
@@ -434,10 +444,30 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/02/27/初识Hibernate/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/27/初识Hibernate/hibernate_logo.png)" alt="初识Hibernate" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/27/初识Hibernate/" class="title">初识Hibernate</a></p>
+                            <p class="item-date"><time datetime="2019-02-27T03:27:00.823Z" itemprop="datePublished">2019-02-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="thumbnail">
     
     
-        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
+        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
     
     
 </a>
@@ -511,26 +541,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/01/27/初识Java多线程/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg)" alt="初识Java多线程" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
-                            <p class="item-title"><a href="/2019/01/27/初识Java多线程/" class="title">初识Java多线程</a></p>
-                            <p class="item-date"><time datetime="2019-01-27T13:40:00.203Z" itemprop="datePublished">2019-01-27</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -540,7 +550,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">5</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">6</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -550,7 +560,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -560,7 +570,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -570,7 +580,7 @@
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
+            <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/ORM/" style="font-size: 10px;">ORM</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
         </div>
     </div>
 

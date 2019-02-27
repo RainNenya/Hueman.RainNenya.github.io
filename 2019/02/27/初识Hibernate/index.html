@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>初识Hibernate | RainNenya</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="ORM,Hibernate">
+    
+    <meta name="description" content="一、什么是Hibernate? Hibernate （开放源代码的对象关系映射框架）: Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。">
+<meta name="keywords" content="ORM,Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识Hibernate">
+<meta property="og:url" content="http://RainNenya.github.io/2019/02/27/初识Hibernate/index.html">
+<meta property="og:site_name" content="RainNenya">
+<meta property="og:description" content="一、什么是Hibernate? Hibernate （开放源代码的对象关系映射框架）: Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://rainnenya.github.io/2019/02/27/初识Hibernate/hibernate_logo.png">
+<meta property="og:updated_time" content="2019-02-27T10:02:52.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识Hibernate">
+<meta name="twitter:description" content="一、什么是Hibernate? Hibernate （开放源代码的对象关系映射框架）: Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/27/初识Hibernate/hibernate_logo.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RainNenya" type="application/atom+xml">
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?adc2a5395e377d9f9eac2222ebfe460c";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Java/">Java</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Java/">Java</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-初识Hibernate" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        初识Hibernate
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/27/初识Hibernate/" class="article-date">
+            <time datetime="2019-02-27T03:27:00.823Z" itemprop="datePublished">2019-02-27</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Hibernate/">Hibernate</a>, <a class="tag-link" href="/tags/ORM/">ORM</a>
+    </div>
+
+				阅读数量:<span id="/2019/02/27/初识Hibernate/" class="leancloud_visitors" data-flag-title="初识Hibernate"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/2019/02/27/初识Hibernate/hibernate_logo.png" alt="hibernate_logo"></p>
+<h3 id="一、什么是Hibernate"><a href="#一、什么是Hibernate" class="headerlink" title="一、什么是Hibernate?"></a>一、什么是Hibernate?</h3><blockquote>
+<p>Hibernate （开放源代码的对象关系映射框架）: Hibernate是一个开放源代码的<strong>对象关系映射框架</strong>，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个<strong>全自动的ORM框架</strong>，hibernate可以<strong>自动生成SQL语句，自动执行</strong>，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="二、为什么使用Hibernate？"><a href="#二、为什么使用Hibernate？" class="headerlink" title="二、为什么使用Hibernate？"></a>二、为什么使用Hibernate？</h3><h4 id="2-1-Hibernate相对于传统JDBC的优点"><a href="#2-1-Hibernate相对于传统JDBC的优点" class="headerlink" title="2.1 Hibernate相对于传统JDBC的优点"></a>2.1 Hibernate相对于传统JDBC的优点</h4><ol>
+<li><p>对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。</p>
+</li>
+<li><p>Hibernate是一个基于JDBC的主流持久化框架，是一个优秀的ORM实现。他很大程度的简化DAO层的编码工作。</p>
+</li>
+<li><p>hibernate使用Java反射机制，而不是字节码增强程序来实现透明性。</p>
+</li>
+<li><p>hibernate的性能非常好，因为它是个轻量级框架。映射的灵活性很出色。它支持各种关系数据库，从一对一到多对多的各种复杂关系。</p>
+</li>
+</ol>
+<h4 id="2-2-Hibernate相对于MyBatis的区别与联系"><a href="#2-2-Hibernate相对于MyBatis的区别与联系" class="headerlink" title="2.2 Hibernate相对于MyBatis的区别与联系"></a>2.2 Hibernate相对于MyBatis的区别与联系</h4><h5 id="两者区别："><a href="#两者区别：" class="headerlink" title="两者区别："></a>两者区别：</h5><p><img src="/2019/02/27/初识Hibernate/hibernate_table1.png" alt="Hibernate与MyBatis"></p>
+<h5 id="两者联系："><a href="#两者联系：" class="headerlink" title="两者联系："></a>两者联系：</h5><p>缓存方面</p>
+<p><strong>相同点：</strong></p>
+<p>Hibernate和Mybatis的二级缓存除了采用系统默认的缓存机制外，都可以通过实现你自己的缓存或为其他第三方缓    存方案，创建适配器来完全覆盖缓存行为。</p>
+<p><strong>不同点：</strong></p>
+<p>Hibernate的二级缓存配置在SessionFactory生成的配置文件中进行详细配置，然后再在具体的表-对象映射中配置是那种缓存。</p>
+<p>MyBatis的二级缓存配置都是在每个具体的表-对象映射中进行详细配置，这样针对不同的表可以自定义不同的缓存机制。并且Mybatis可以在命名空间中共享相同的缓存配置和实例，通过Cache-ref来实现。</p>
+<h3 id="三、Hibernate的使用"><a href="#三、Hibernate的使用" class="headerlink" title="三、Hibernate的使用"></a>三、Hibernate的使用</h3><p>准备好User实体类和数据库记录</p>
+<p><code>User.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String passWord;</span><br><span class="line">    <span class="comment">//Get、Set方法，此处省略。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mysql数据库：</p>
+<p><img src="/2019/02/27/初识Hibernate/tbl_user.png" alt="mysql数据库"></p>
+<h4 id="3-1-添加pom依赖"><a href="#3-1-添加pom依赖" class="headerlink" title="3.1 添加pom依赖"></a>3.1 添加pom依赖</h4><p>Hibernate基础Maven依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 添加hibernate的依赖 开始--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- http://mvnrepository.com/artifact/org.hibernate/hibernate --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.2.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- &lt;dependency&gt;</span></span><br><span class="line"><span class="comment">      &lt;groupId&gt;cglib&lt;/groupId&gt;</span></span><br><span class="line"><span class="comment">      &lt;artifactId&gt;cglib-nodep&lt;/artifactId&gt;</span></span><br><span class="line"><span class="comment">      &lt;version&gt;3.1&lt;/version&gt;</span></span><br><span class="line"><span class="comment">    &lt;/dependency&gt;</span></span><br><span class="line"><span class="comment">    &amp;lt;!&amp;ndash; Hibernate library dependecy end &amp;ndash;&amp;gt;</span></span><br><span class="line"><span class="comment">    &lt;dependency&gt;</span></span><br><span class="line"><span class="comment">      &lt;groupId&gt;javax.transaction&lt;/groupId&gt;</span></span><br><span class="line"><span class="comment">      &lt;artifactId&gt;jta&lt;/artifactId&gt;</span></span><br><span class="line"><span class="comment">      &lt;version&gt;1.1&lt;/version&gt;</span></span><br><span class="line"><span class="comment">    &lt;/dependency&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加hibernate的依赖 结束--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mysql数据库的驱动包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-hibernate-cfg-xml配置文件"><a href="#3-2-hibernate-cfg-xml配置文件" class="headerlink" title="3.2 hibernate.cfg.xml配置文件"></a>3.2 hibernate.cfg.xml配置文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;property name="hibernate.bytecode.use_reflection_optimizer"&gt;false&lt;/property&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定数据库的驱动程序--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定连接数据库的口令--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定连接数据库的URL--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/Hibernatetraning<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定连接数据库的用户名--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库方言，用于指定使用的sql从属于哪个数据库--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--如果为true，表示在程序运行时会在控制台输出SQL语句，有利于跟踪Hibernate的运行状态，默认为false。应用开发阶段设置为true，发布阶段应设置为false提高运行性能--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- &lt;property name="hibernate.hbm2ddl.auto"&gt;update&lt;/property&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"mapper/User.hbm.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-User-hbm-xml映射文件"><a href="#3-2-User-hbm-xml映射文件" class="headerlink" title="3.2 User.hbm.xml映射文件"></a>3.2 User.hbm.xml映射文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"</span></span><br><span class="line"><span class="meta">        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.entity.User"</span> <span class="attr">table</span>=<span class="string">"tbl_user"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  在User里面 id 的set 和 get 方法里 也要设置为Integer类型的，不然会报错 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"assigned"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"username"</span>  <span class="attr">type</span>=<span class="string">"java.lang.String"</span> <span class="attr">length</span>=<span class="string">"20"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"passWord"</span> <span class="attr">column</span>=<span class="string">"password"</span>  <span class="attr">type</span>=<span class="string">"java.lang.String"</span> <span class="attr">length</span>=<span class="string">"20"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Configuration config = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">      SessionFactory sessionFactory = config.buildSessionFactory();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//测试session是否创建，以及是否可以从user映射的表里获取记录</span></span><br><span class="line">      Session session = sessionFactory.openSession();</span><br><span class="line">      <span class="comment">//System.out.println("session=="+session);</span></span><br><span class="line">      User user = (User)session.get(User.class,<span class="number">1</span>);</span><br><span class="line">      System.out.println(user);</span><br><span class="line"><span class="comment">//关闭会话工厂，项目自动停止。生产环境中千万不要写这句。</span></span><br><span class="line"><span class="comment">//sessionFactory.close();</span></span><br></pre></td></tr></table></figure>
+<p>控制台输出：User{id=1, userName=’Jack’, passWord=’123’}</p>
+<h3 id="四、Hibernate基本概念"><a href="#四、Hibernate基本概念" class="headerlink" title="四、Hibernate基本概念"></a>四、Hibernate基本概念</h3><blockquote>
+<p>Hibernate是自动化程度更高ORM（Object-Relational Mapping）框架，不是面向SQL的持久层框架，以更加OO方式来编写数据读写代码。</p>
+</blockquote>
+<p><img src="/2019/02/27/初识Hibernate/hibernate_core1.png" alt="Hibernate"></p>
+<h4 id="4-1-对象与关系型数据库"><a href="#4-1-对象与关系型数据库" class="headerlink" title="4.1 对象与关系型数据库"></a>4.1 对象与关系型数据库</h4><p><img src="/2019/02/27/初识Hibernate/hibernate_table2.png" alt="对象与关系型数据库"></p>
+<p><strong>注意：一定要清楚当前操作的东西，是属于对象层面的还是关系型数据库层面的，解决异常也是如此。</strong></p>
+<p><img src="/2019/02/27/初识Hibernate/hibernate_core2.jpg" alt="Hibernate核心架构"></p>
+<blockquote>
+<p>Hibernate中的对象有3中状态,瞬时对象(Transient Objects)、持久化对象(Persistent Objects)和离线对象(Detached Objects也叫做脱管对象)。</p>
+</blockquote>
+<h4 id="4-2-HibernateUtils-java工具类"><a href="#4-2-HibernateUtils-java工具类" class="headerlink" title="4.2 HibernateUtils.java工具类"></a>4.2 <code>HibernateUtils.java</code>工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HibernateUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SessionFactory sessionFactory = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Configuration configuration = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line">            ServiceRegistry serviceRegistry = <span class="keyword">new</span> ServiceRegistryBuilder()</span><br><span class="line">                    .applySettings(configuration.getProperties())</span><br><span class="line">                    .build();</span><br><span class="line">            sessionFactory = configuration.buildSessionFactory(serviceRegistry);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (HibernateException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"SessionFactory初始化失败"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SessionFactory <span class="title">getSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sessionFactory != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> sessionFactory;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"sessionFactory为空，请检查配置文件"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Session session = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (sessionFactory != <span class="keyword">null</span>)&#123;</span><br><span class="line">                session = sessionFactory.openSession();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (HibernateException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> session;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeSession</span><span class="params">(Session session)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (session != <span class="keyword">null</span> &amp;&amp; session.isOpen())&#123;</span><br><span class="line">                session.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (HibernateException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-3-瞬时对象与持久化对象"><a href="#4-3-瞬时对象与持久化对象" class="headerlink" title="4.3 瞬时对象与持久化对象"></a>4.3 瞬时对象与持久化对象</h4><p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Session session = HibernateUtils.getSession();</span><br><span class="line">      Transaction tx = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">      User user1 = <span class="keyword">new</span> User();</span><br><span class="line">      user1.setId(<span class="number">2</span>);</span><br><span class="line">      user1.setUserName(<span class="string">"Frank"</span>);</span><br><span class="line">      user1.setPassWord(<span class="string">"111"</span>);</span><br><span class="line">      <span class="comment">// 当前user1在数据库中没有记录进行关联，所有此时user1是瞬时对象。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将user1持久化</span></span><br><span class="line">      session.save(user1);</span><br><span class="line">      tx.commit();</span><br><span class="line"></span><br><span class="line">      User user2 = (User)session.get(User.class, <span class="number">2</span>);</span><br><span class="line">      System.out.println(user2);</span><br><span class="line">      <span class="comment">// 当前user2在数据库有唯一一条记录对应，所有此时user2是持久化对象。</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-4-hibernate-hbm2ddl-auto"><a href="#4-4-hibernate-hbm2ddl-auto" class="headerlink" title="4.4 hibernate.hbm2ddl.auto"></a>4.4 hibernate.hbm2ddl.auto</h4><p>hibernate.hbm2ddl.auto属性值（从类自动生成数据库DDL操作）</p>
+<p><code>&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</code></p>
+<ol>
+<li>create：如果设置为该值，则每次加载hibernate时（准确说应是创建SessionFactory时）都会删除以前创建的表而根据model重新生成表，即使前后的表没有任何变化，通常会造成数据库数据丢失，需谨慎使用这个取值。</li>
+<li>create-drop：与create差不多，所不同的是每次sessionFactory关闭时，就会删除所有表。</li>
+<li>update（最常用）：这个取值比较常用，需要先建立数据库，<strong>在第一次加载hibernate时会自动创建表，以后创建hibernate会自动根据model更新表结构，即使表结构改变了，以前的行不会被删除。</strong></li>
+<li>validate：每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新值。</li>
+</ol>
+
+        </div>		
+        <footer class="article-footer">
+			<!-- ������City�氲װ���� -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MjY2MS8xOTIwOA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Ϊ����ʹ�����������۹����뼤��JavaScript</noscript>
+</div>
+<!-- City�氲װ��������� -->
+            
+
+
+
+    <a data-url="http://RainNenya.github.io/2019/02/27/初识Hibernate/" data-id="cjsn1lxkb000y74o0mnqzde96" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Percy"
+        },
+        "headline": "初识Hibernate",
+        "image": "http://RainNenya.github.io/2019/02/27/初识Hibernate/hibernate_logo.png",
+        "keywords": "ORM Hibernate",
+        "genre": "日常技术 Java",
+        "datePublished": "2019-02-27",
+        "dateCreated": "2019-02-27",
+        "dateModified": "2019-02-27",
+        "url": "http://RainNenya.github.io/2019/02/27/初识Hibernate/",
+        "description": "
+一、什么是Hibernate?
+Hibernate （开放源代码的对象关系映射框架）: Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。
+"
+        "wordCount": 1885
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RainNenya" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">SpringMVC常用客户端参数接收方式</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、什么是Hibernate"><span class="toc-number">1.</span> <span class="toc-text">一、什么是Hibernate?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、为什么使用Hibernate？"><span class="toc-number">2.</span> <span class="toc-text">二、为什么使用Hibernate？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Hibernate相对于传统JDBC的优点"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Hibernate相对于传统JDBC的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Hibernate相对于MyBatis的区别与联系"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Hibernate相对于MyBatis的区别与联系</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#两者区别："><span class="toc-number">2.2.1.</span> <span class="toc-text">两者区别：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#两者联系："><span class="toc-number">2.2.2.</span> <span class="toc-text">两者联系：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、Hibernate的使用"><span class="toc-number">3.</span> <span class="toc-text">三、Hibernate的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-添加pom依赖"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 添加pom依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-hibernate-cfg-xml配置文件"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 hibernate.cfg.xml配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-User-hbm-xml映射文件"><span class="toc-number">3.3.</span> <span class="toc-text">3.2 User.hbm.xml映射文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">3.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、Hibernate基本概念"><span class="toc-number">4.</span> <span class="toc-text">四、Hibernate基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-对象与关系型数据库"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 对象与关系型数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-HibernateUtils-java工具类"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 HibernateUtils.java工具类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-瞬时对象与持久化对象"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 瞬时对象与持久化对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-hibernate-hbm2ddl-auto"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 hibernate.hbm2ddl.auto</span></a></li></ol></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/27/初识Hibernate/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/27/初识Hibernate/hibernate_logo.png)" alt="初识Hibernate" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/27/初识Hibernate/" class="title">初识Hibernate</a></p>
+                            <p class="item-date"><time datetime="2019-02-27T03:27:00.823Z" itemprop="datePublished">2019-02-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="title">SpringMVC常用客户端参数接收方式</a></p>
+                            <p class="item-date"><time datetime="2019-02-20T13:28:13.795Z" itemprop="datePublished">2019-02-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/19/分页插件PageHelper/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/19/分页插件PageHelper/PageHelper.png)" alt="分页插件PageHelper" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/19/分页插件PageHelper/" class="title">分页插件PageHelper</a></p>
+                            <p class="item-date"><time datetime="2019-02-19T01:09:02.351Z" itemprop="datePublished">2019-02-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/枚举的使用示例/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/17/枚举的使用示例/enum.png)" alt="枚举的使用示例" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/17/枚举的使用示例/" class="title">枚举的使用示例</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T03:46:25.562Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/16/Java的8中基本数据类型/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/16/Java的8中基本数据类型/DataType.png)" alt="Java的8中基本数据类型" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/16/Java的8中基本数据类型/" class="title">Java的8中基本数据类型</a></p>
+                            <p class="item-date"><time datetime="2019-02-16T06:07:03.084Z" itemprop="datePublished">2019-02-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/ORM/" style="font-size: 10px;">ORM</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+	    <!--����������Ҫд������-->
+			<p>Jaberrwock123@163.com</p>
+        </div>
+    </div>
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 Percy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+				<!--这一段是不蒜子的访问量统计代码-->
+				<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+				<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+				<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'pm9u6h9hfnT5JN9NSeMz6rL6-gzGzoHsz';
+    var APP_KEY = 'Wm7UyiX8pKMulgaoBRi164yd';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://RainNenya.github.io/2019/02/27/初识Hibernate/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -12,19 +12,19 @@
     
         <meta name="keywords" content="multithreading">
     
-    <meta name="description" content="线程的概念和其两种实现方式一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单">
+    <meta name="description" content="一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多">
 <meta name="keywords" content="multithreading">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识Java多线程">
 <meta property="og:url" content="http://RainNenya.github.io/2019/01/27/初识Java多线程/index.html">
 <meta property="og:site_name" content="RainNenya">
-<meta property="og:description" content="线程的概念和其两种实现方式一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单">
+<meta property="og:description" content="一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg">
-<meta property="og:updated_time" content="2019-02-16T06:11:04.262Z">
+<meta property="og:updated_time" content="2019-02-27T10:07:48.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Java多线程">
-<meta name="twitter:description" content="线程的概念和其两种实现方式一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单">
+<meta name="twitter:description" content="一、程序、进程、线程の概念 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多">
 <meta name="twitter:image" content="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg">
     
 
@@ -184,7 +184,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h3 id="线程的概念和其两种实现方式"><a href="#线程的概念和其两种实现方式" class="headerlink" title="线程的概念和其两种实现方式"></a>线程的概念和其两种实现方式</h3><h4 id="一、程序、进程、线程の概念"><a href="#一、程序、进程、线程の概念" class="headerlink" title="一、程序、进程、线程の概念"></a>一、程序、进程、线程の概念</h4><blockquote>
+            <h4 id="一、程序、进程、线程の概念"><a href="#一、程序、进程、线程の概念" class="headerlink" title="一、程序、进程、线程の概念"></a>一、程序、进程、线程の概念</h4><blockquote>
 <p><strong>1、程序</strong>：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。</p>
 <p><strong>2、进程:</strong> 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。</p>
 <p><strong>3、线程</strong>：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多个线程的。</p>
@@ -242,7 +242,7 @@
 
 
 
-    <a data-url="http://RainNenya.github.io/2019/01/27/初识Java多线程/" data-id="cjsketoqh0004kgo0v95qpfrm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://RainNenya.github.io/2019/01/27/初识Java多线程/" data-id="cjsn1lxa8000674o09x0ddwgt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -318,14 +318,14 @@
         "genre": "日常技术 Java",
         "datePublished": "2019-01-27",
         "dateCreated": "2019-01-27",
-        "dateModified": "2019-02-16",
+        "dateModified": "2019-02-27",
         "url": "http://RainNenya.github.io/2019/01/27/初识Java多线程/",
-        "description": "线程的概念和其两种实现方式一、程序、进程、线程の概念
+        "description": "一、程序、进程、线程の概念
 1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。
 2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。
 3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多个线程的。
 "
-        "wordCount": 600
+        "wordCount": 596
     }
 </script>
 
@@ -394,7 +394,7 @@
     <h3 class="widget-title">目录</h3>
     <div class="widget">
         <div id="toc" class="toc-article">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的概念和其两种实现方式"><span class="toc-number">1.</span> <span class="toc-text">线程的概念和其两种实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、程序、进程、线程の概念"><span class="toc-number">1.1.</span> <span class="toc-text">一、程序、进程、线程の概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、线程的实现方法"><span class="toc-number">1.2.</span> <span class="toc-text">二、线程的实现方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-单线程"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.单线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-继承Thread类实现线程"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.继承Thread类实现线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、Java线程的状态"><span class="toc-number">1.3.</span> <span class="toc-text">三、Java线程的状态</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#初始状态"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#就绪状态（Runnable）"><span class="toc-number">1.3.2.</span> <span class="toc-text">就绪状态（Runnable）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#运行状态"><span class="toc-number">1.3.3.</span> <span class="toc-text">运行状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#阻塞状态（Blocked）"><span class="toc-number">1.3.4.</span> <span class="toc-text">阻塞状态（Blocked）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#死亡状态（Deaded）"><span class="toc-number">1.3.5.</span> <span class="toc-text">死亡状态（Deaded）</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、程序、进程、线程の概念"><span class="toc-number">1.</span> <span class="toc-text">一、程序、进程、线程の概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、线程的实现方法"><span class="toc-number">2.</span> <span class="toc-text">二、线程的实现方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-单线程"><span class="toc-number">2.1.</span> <span class="toc-text">1.单线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-继承Thread类实现线程"><span class="toc-number">2.2.</span> <span class="toc-text">2.继承Thread类实现线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、Java线程的状态"><span class="toc-number">3.</span> <span class="toc-text">三、Java线程的状态</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#初始状态"><span class="toc-number">3.1.</span> <span class="toc-text">初始状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#就绪状态（Runnable）"><span class="toc-number">3.2.</span> <span class="toc-text">就绪状态（Runnable）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#运行状态"><span class="toc-number">3.3.</span> <span class="toc-text">运行状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#阻塞状态（Blocked）"><span class="toc-number">3.4.</span> <span class="toc-text">阻塞状态（Blocked）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#死亡状态（Deaded）"><span class="toc-number">3.5.</span> <span class="toc-text">死亡状态（Deaded）</span></a></li></ol></li></ol>
         </div>
     </div>
 </div>
@@ -410,10 +410,30 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/02/27/初识Hibernate/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/27/初识Hibernate/hibernate_logo.png)" alt="初识Hibernate" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/27/初识Hibernate/" class="title">初识Hibernate</a></p>
+                            <p class="item-date"><time datetime="2019-02-27T03:27:00.823Z" itemprop="datePublished">2019-02-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/02/20/SpringMVC常用客户端参数接收方式/" class="thumbnail">
     
     
-        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/Spring.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
+        <span style="background-image:url(/2019/02/20/SpringMVC常用客户端参数接收方式/SpringMVC.jpg)" alt="SpringMVC常用客户端参数接收方式" class="thumbnail-image"></span>
     
     
 </a>
@@ -487,26 +507,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/01/27/初识Java多线程/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg)" alt="初识Java多线程" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
-                            <p class="item-title"><a href="/2019/01/27/初识Java多线程/" class="title">初识Java多线程</a></p>
-                            <p class="item-date"><time datetime="2019-01-27T13:40:00.203Z" itemprop="datePublished">2019-01-27</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -516,7 +516,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">5</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">6</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -526,7 +526,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -536,7 +536,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/">ORM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -546,7 +546,7 @@
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
+            <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/ORM/" style="font-size: 10px;">ORM</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
         </div>
     </div>
 
