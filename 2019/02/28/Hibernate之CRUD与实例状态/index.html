@@ -21,7 +21,7 @@
 <meta property="og:description" content="在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://rainnenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png">
-<meta property="og:updated_time" content="2019-03-01T15:26:24.813Z">
+<meta property="og:updated_time" content="2019-03-01T15:48:50.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate之CRUD与实例状态">
 <meta name="twitter:description" content="在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。">
@@ -194,24 +194,47 @@
 <p>解决办法：手动设置事务提交</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Sandy"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"aaa"</span>);</span><br><span class="line">    session.save(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：Hibernate: insert into tbl_user (username, password, id) values (?, ?, ?)</p>
+<blockquote>
+<p>save()方法把一个临时对象加入到Session缓存中，并持久化该临时对象，计划执行一个insert语句。</p>
+</blockquote>
 <h3 id="1-2-HibernateのRead"><a href="#1-2-HibernateのRead" class="headerlink" title="1.2 HibernateのRead"></a>1.2 HibernateのRead</h3><p>这里的查询准确来说应该称为<strong>对象加载</strong>。</p>
 <blockquote>
 <p>Hibernate中<code>session.get()</code>方式获取被称为对象加载，只能从数据库中加载出唯一一条记录。查询多条数据Hibernate另提供了API。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRead</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>User{id=3, userName=’Sandy’, passWord=’aaa’}</p>
+<blockquote>
+<p><strong>get()</strong>和<strong>load()</strong>  试图从数据库加载一个实体对象时，Session先判断对象是否存在，如果存在就不到数据库中检索。返回的对象都位于Session缓存中，接下来修改了持久化对象的属性后，当Session清理缓存时，会根据持久化对象的属性变化来同步更新数据库。</p>
+</blockquote>
+<p>​        <strong>区别：</strong></p>
+<p>​       （1）当数据库中不存在与OID对应的记录时，load()方法抛出ObjectNotFoundException异常，而get()方法返回null.</p>
+<p>​       （2）两者采用不同的检索策略。</p>
+<p>​         默认情况下，load()方法采用延迟检索策略（Hibernate不会执行select语句，仅返回实体类的代理类实例，占用内存很少）；而get()采用立即检索策略（Hibernate会立即执行select语句）。</p>
+<p>​        <strong>使用场合：</strong> </p>
+<p>​     （1）如果加载一个对象的目的是为了访问它的各个属性，可以用get();</p>
+<p>​     （2）如果加载一个对象的目的是为了删除它，或者建立与别的对象的关联关系，可以用load()  ; </p>
 <h3 id="1-3-HibernateのUpdate"><a href="#1-3-HibernateのUpdate" class="headerlink" title="1.3 HibernateのUpdate"></a>1.3 HibernateのUpdate</h3><blockquote>
 <p>更新操作并没有使用<code>session.update()</code>方法，直接<code>tx.commit()</code>便能够成功更新数据。<code>session.upate()</code>方法另有作用。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Bob"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    <span class="comment">// 脏数据（Dirty Data）</span></span><br><span class="line">    <span class="comment">// 过时数据检测（前提是该对象是持久态）</span></span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: update tbl_user set username=?, password=? where id=?</p>
+<blockquote>
+<p>Session在清理缓存的时候会自动进行<strong>脏检查</strong>（dirty-check），如果发现Session缓存中的对象与数据库中相应的记录不一致，就会同步数据库。</p>
+</blockquote>
 <h3 id="1-4-HibernateのDelete"><a href="#1-4-HibernateのDelete" class="headerlink" title="1.4 HibernateのDelete"></a>1.4 HibernateのDelete</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Bob"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    session.delete(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: delete from tbl_user where id=?</p>
+<blockquote>
+<p>计划执行一个delete语句，把对象从Session缓存中删除。</p>
+</blockquote>
 <h3 id="1-5-saveOrUpdate"><a href="#1-5-saveOrUpdate" class="headerlink" title="1.5 saveOrUpdate"></a>1.5 saveOrUpdate</h3><blockquote>
-<p>session.saveOrUpdate()方法对于新增和更新数据都可用。</p>
+<p>同时包含了save()和update()方法的功能。如果传入的是临时对象，就调用save()方法；如果传入的是游离对象，就调用update()方法如果传入的是持久化对象，就直接返回。        </p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSaveOrUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">5</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Sandy"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    session.saveOrUpdate(user);</span><br><span class="line"></span><br><span class="line">    User user2 = (User)session.get(User.class, <span class="number">1</span>);</span><br><span class="line">    user2.setUserName(<span class="string">"Andy"</span>);</span><br><span class="line">    user2.setPassWord(<span class="string">"apple"</span>);</span><br><span class="line">    session.saveOrUpdate(user2);</span><br><span class="line">    tx.commit();</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>控制台输出：Hibernate: select user_.id, user_.username as username2_8_, user_.password as password3_8_ from tbl_user user_ where user_.id=?<br>Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: insert into tbl_user (username, password, id) values (?, ?, ?)<br>Hibernate: update tbl_user set username=?, password=? where id=?</p>
+<blockquote>
+<p>update()方法把游离对象加入当前Session缓存中，计划执行update语句。当update()方法关联一个游离对象时，如果session缓存中已经有一个同类型且ID相同的持久化对象，那么update()方法会抛出NonUniqueException异常。当update()方法关联一个持久化对象时，该方法不起作用。</p>
+<p>close()：清空session缓存。</p>
+</blockquote>
 <h2 id="二、Hibernateの实例状态"><a href="#二、Hibernateの实例状态" class="headerlink" title="二、Hibernateの实例状态"></a>二、Hibernateの实例状态</h2><blockquote>
 <p>Hibernate中的对象有3中状态,瞬时对象(TransientObjects)、持久化对象(PersistentObjects)和离线对象(DetachedObjects也叫做脱管对象)。</p>
 </blockquote>
@@ -250,7 +273,7 @@
 
 
 
-    <a data-url="http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/" data-id="cjsq7qt0w0000kgo0wsn16maz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/" data-id="cjsq8ixko000yj4o0fbs3ewb2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -331,7 +354,7 @@
         "description": "
 在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。
 "
-        "wordCount": 1010
+        "wordCount": 1073
     }
 </script>
 
