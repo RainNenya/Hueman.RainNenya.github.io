@@ -6,25 +6,26 @@
     
 
     
-    <title>Java的8中基本数据类型 | RainNenya</title>
+    <title>Hibernate之CRUD与实例状态 | RainNenya</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="">
+        <meta name="keywords" content="ORM,Hibernate">
     
-    <meta name="description" content="一、什么是数据类型 百度百科: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
+    <meta name="description" content="在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。">
+<meta name="keywords" content="ORM,Hibernate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的8中基本数据类型">
-<meta property="og:url" content="http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/index.html">
+<meta property="og:title" content="Hibernate之CRUD与实例状态">
+<meta property="og:url" content="http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/index.html">
 <meta property="og:site_name" content="RainNenya">
-<meta property="og:description" content="一、什么是数据类型 百度百科: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
+<meta property="og:description" content="在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://rainnenya.github.io/2019/02/16/Java的8中基本数据类型/DataType.png">
-<meta property="og:updated_time" content="2019-02-17T02:33:30.144Z">
+<meta property="og:image" content="http://rainnenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png">
+<meta property="og:updated_time" content="2019-03-01T15:26:24.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的8中基本数据类型">
-<meta name="twitter:description" content="一、什么是数据类型 百度百科: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
-<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/16/Java的8中基本数据类型/DataType.png">
+<meta name="twitter:title" content="Hibernate之CRUD与实例状态">
+<meta name="twitter:description" content="在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png">
     
 
     
@@ -148,14 +149,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Java的8中基本数据类型" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+                            <article id="post-Hibernate之CRUD与实例状态" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Java的8中基本数据类型
+        Hibernate之CRUD与实例状态
         </h1>
     
 
@@ -165,99 +166,65 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2019/02/16/Java的8中基本数据类型/" class="article-date">
-            <time datetime="2019-02-16T06:07:03.084Z" itemprop="datePublished">2019-02-16</time>
+        <a href="/2019/02/28/Hibernate之CRUD与实例状态/" class="article-date">
+            <time datetime="2019-02-28T02:22:48.528Z" itemprop="datePublished">2019-02-28</time>
         </a>
     </div>
 
 		
 
                 
-				阅读数量:<span id="/2019/02/16/Java的8中基本数据类型/" class="leancloud_visitors" data-flag-title="Java的8中基本数据类型"></span>次
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Hibernate/">Hibernate</a>, <a class="tag-link" href="/tags/ORM/">ORM</a>
+    </div>
+
+				阅读数量:<span id="/2019/02/28/Hibernate之CRUD与实例状态/" class="leancloud_visitors" data-flag-title="Hibernate之CRUD与实例状态"></span>次
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h3 id="一、什么是数据类型"><a href="#一、什么是数据类型" class="headerlink" title="一、什么是数据类型"></a>一、什么是数据类型</h3><blockquote>
-<p><strong>百度百科</strong>: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。<br>所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。</p>
+            <blockquote>
+<p>在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="二、Java的基本数据类型"><a href="#二、Java的基本数据类型" class="headerlink" title="二、Java的基本数据类型"></a>二、Java的基本数据类型</h3><blockquote>
-<p>Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。</p>
+<h2 id="一、HibernateのCRUD操作"><a href="#一、HibernateのCRUD操作" class="headerlink" title="一、HibernateのCRUD操作"></a>一、HibernateのCRUD操作</h2><h3 id="1-1-HibernateのCreate"><a href="#1-1-HibernateのCreate" class="headerlink" title="1.1 HibernateのCreate"></a>1.1 HibernateのCreate</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Sandy"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"aaa"</span>);</span><br><span class="line">    session.save(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：Hibernate事务默认是关闭的，执行后不会报错，但是数据并没有成功插入数据库。</strong></p>
+<p>控制台输出：Schema update complete</p>
+<p>解决办法：手动设置事务提交</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Sandy"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"aaa"</span>);</span><br><span class="line">    session.save(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: insert into tbl_user (username, password, id) values (?, ?, ?)</p>
+<h3 id="1-2-HibernateのRead"><a href="#1-2-HibernateのRead" class="headerlink" title="1.2 HibernateのRead"></a>1.2 HibernateのRead</h3><p>这里的查询准确来说应该称为<strong>对象加载</strong>。</p>
+<blockquote>
+<p>Hibernate中<code>session.get()</code>方式获取被称为对象加载，只能从数据库中加载出唯一一条记录。查询多条数据Hibernate另提供了API。</p>
 </blockquote>
-<p><img src="/2019/02/16/Java的8中基本数据类型/DataType.png" alt="Java数据类型"></p>
-<h3 id="三、Java基本数据的大小，默认值和取值范围"><a href="#三、Java基本数据的大小，默认值和取值范围" class="headerlink" title="三、Java基本数据的大小，默认值和取值范围"></a>三、Java基本数据的大小，默认值和取值范围</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">序号</th>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">位数</th>
-<th style="text-align:center">默认值</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">byte(位)</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">-2^7  -  2^7-1</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">short(短整型)</td>
-<td style="text-align:center">16</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">-2^15  -  2^15-1</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">int(整型)</td>
-<td style="text-align:center">32</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">-2^31  -  2^31-1</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">long(长整型)</td>
-<td style="text-align:center">64</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">-2^63  -  2^63-1</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">float(单精度)</td>
-<td style="text-align:center">32</td>
-<td style="text-align:center">0.0</td>
-<td style="text-align:center">-2^31  -  2^31-1</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">double(双精度)</td>
-<td style="text-align:center">64</td>
-<td style="text-align:center">0.0</td>
-<td style="text-align:center">-2^63  -  2^63-1</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">char(字符)</td>
-<td style="text-align:center">16</td>
-<td style="text-align:center">空</td>
-<td style="text-align:center">0 - 2^16-1</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">boolean(布尔)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">true - false</td>
-</tr>
-</tbody>
-</table>
-<h3 id="四、IDEA中验证基本数据的大小，默认值和取值范围"><a href="#四、IDEA中验证基本数据的大小，默认值和取值范围" class="headerlink" title="四、IDEA中验证基本数据的大小，默认值和取值范围"></a>四、IDEA中验证基本数据的大小，默认值和取值范围</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataType</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">byte</span> b;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">short</span> s;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> l;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">float</span> f;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">boolean</span> bool;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"byte[大小:"</span>+Byte.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+b</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Byte.MIN_VALUE+<span class="string">" ~ "</span>+Byte.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"short[大小:"</span>+Short.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+s</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Short.MIN_VALUE+<span class="string">" ~ "</span>+Short.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"int[大小:"</span>+Integer.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+i</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Integer.MIN_VALUE+<span class="string">" ~ "</span>+Integer.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"long[大小:"</span>+Long.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+l</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Long.MIN_VALUE+<span class="string">" ~ "</span>+Long.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"float[大小:"</span>+Float.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+f</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Float.MIN_VALUE+<span class="string">" ~ "</span>+Float.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"double[大小:"</span>+Double.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+d</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Double.MIN_VALUE+<span class="string">" ~ "</span>+Double.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"char[大小:"</span>+Character.SIZE</span><br><span class="line">                +<span class="string">", 默认值:"</span>+c</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+(<span class="keyword">int</span>)Character.MIN_VALUE+<span class="string">" ~ "</span>+(<span class="keyword">int</span>)Character.MAX_VALUE+<span class="string">"]"</span>);</span><br><span class="line">        System.out.println(<span class="string">"boolean[默认值:"</span>+bool</span><br><span class="line">                +<span class="string">"; 数据范围:"</span>+Boolean.TRUE+<span class="string">" &amp; "</span>+Boolean.FALSE+<span class="string">"]"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<p><img src="/2019/02/16/Java的8中基本数据类型/result.png" alt="result"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRead</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>User{id=3, userName=’Sandy’, passWord=’aaa’}</p>
+<h3 id="1-3-HibernateのUpdate"><a href="#1-3-HibernateのUpdate" class="headerlink" title="1.3 HibernateのUpdate"></a>1.3 HibernateのUpdate</h3><blockquote>
+<p>更新操作并没有使用<code>session.update()</code>方法，直接<code>tx.commit()</code>便能够成功更新数据。<code>session.upate()</code>方法另有作用。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Bob"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    <span class="comment">// 脏数据（Dirty Data）</span></span><br><span class="line">    <span class="comment">// 过时数据检测（前提是该对象是持久态）</span></span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: update tbl_user set username=?, password=? where id=?</p>
+<h3 id="1-4-HibernateのDelete"><a href="#1-4-HibernateのDelete" class="headerlink" title="1.4 HibernateのDelete"></a>1.4 HibernateのDelete</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = (User)session.get(User.class, <span class="number">3</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Bob"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    session.delete(user);</span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: delete from tbl_user where id=?</p>
+<h3 id="1-5-saveOrUpdate"><a href="#1-5-saveOrUpdate" class="headerlink" title="1.5 saveOrUpdate"></a>1.5 saveOrUpdate</h3><blockquote>
+<p>session.saveOrUpdate()方法对于新增和更新数据都可用。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSaveOrUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Session session = HibernateUtils.getSession();</span><br><span class="line">    Transaction tx = session.beginTransaction();</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">5</span>);</span><br><span class="line">    user.setUserName(<span class="string">"Sandy"</span>);</span><br><span class="line">    user.setPassWord(<span class="string">"123"</span>);</span><br><span class="line">    session.saveOrUpdate(user);</span><br><span class="line"></span><br><span class="line">    User user2 = (User)session.get(User.class, <span class="number">1</span>);</span><br><span class="line">    user2.setUserName(<span class="string">"Andy"</span>);</span><br><span class="line">    user2.setPassWord(<span class="string">"apple"</span>);</span><br><span class="line">    session.saveOrUpdate(user2);</span><br><span class="line">    tx.commit();</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: select user_.id, user_.username as username2_8_, user_.password as password3_8_ from tbl_user user_ where user_.id=?<br>Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>Hibernate: insert into tbl_user (username, password, id) values (?, ?, ?)<br>Hibernate: update tbl_user set username=?, password=? where id=?</p>
+<h2 id="二、Hibernateの实例状态"><a href="#二、Hibernateの实例状态" class="headerlink" title="二、Hibernateの实例状态"></a>二、Hibernateの实例状态</h2><blockquote>
+<p>Hibernate中的对象有3中状态,瞬时对象(TransientObjects)、持久化对象(PersistentObjects)和离线对象(DetachedObjects也叫做脱管对象)。</p>
+</blockquote>
+<p><img src="/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png" alt="Hibernate对象状态转换图"></p>
+<p>Java对象在Hibernate持久化层的状态：</p>
+<ol>
+<li>瞬时（transient）状态：刚用new语句创建，还没有被持久化，并且不处于session缓存中（处于临时状态的对象成为临时对象）。</li>
+<li>持久化（Persistent）状态：已经被持久化，并且加入到session缓存中。处于持久化状态的对象称为持久化对象。</li>
+<li>游离（Detached）状态：已经被持久化，但不再处于session缓存中。处于游离状态的对象称为游离对象。</li>
+<li>删除状态：不再处于session缓存中，并且session已经计划将其从数据库中删除。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Session session = HibernateUtils.getSession();</span><br><span class="line">        Transaction tx = session.beginTransaction();</span><br><span class="line">        <span class="comment">// 持久态对象</span></span><br><span class="line">        <span class="comment">// 1.在数据库中有唯一一条记录关联 2.必须跟一个session关联(必须纳入Hibernate容器)</span></span><br><span class="line">        User user = (User)session.get(User.class, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 临时态</span></span><br><span class="line">        <span class="comment">// User user = new User();</span></span><br><span class="line"></span><br><span class="line">        user.setUserName(<span class="string">"Fancy"</span>);</span><br><span class="line">        user.setPassWord(<span class="string">"abc"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 脏数据（Dirty Data）过时数据检测（前提是该对象是持久态）</span></span><br><span class="line">        tx.commit();</span><br><span class="line">        <span class="comment">// 关闭session</span></span><br><span class="line">        session.close();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 游离态(Detached)</span></span><br><span class="line">        <span class="comment">// 1.在数据库中有唯一一条记录对应 2.当前user没有跟Hibernate的session关联(曾经跟Hibernate关联,现在没有)</span></span><br><span class="line">        <span class="comment">// 无法进行脏数据检测</span></span><br><span class="line">        System.out.println(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把游离态对象变为持久态(再次纳入Hibernate容器管理,再跟一个session关联起来)</span></span><br><span class="line">        Session session2 =HibernateUtils.getSession();</span><br><span class="line">        Transaction tx2 = session2.beginTransaction();</span><br><span class="line">        user.setUserName(<span class="string">"Kathy"</span>);</span><br><span class="line">        user.setPassWord(<span class="string">"good"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把游离态对象同一个session关联,将对象状态变为持久态</span></span><br><span class="line">        session2.update(user);</span><br><span class="line">        tx2.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输出：Hibernate: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.password as password3_8_0_ from tbl_user user0_ where user0_.id=?<br>User{id=1, userName=’Fancy’, passWord=’abc’}<br>Hibernate: update tbl_user set username=?, password=? where id=?</p>
 
         </div>		
         <footer class="article-footer">
@@ -283,7 +250,7 @@
 
 
 
-    <a data-url="http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/" data-id="cjsq7qt270002kgo09moht2h7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/" data-id="cjsq7qt0w0000kgo0wsn16maz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -353,18 +320,18 @@
             "@type": "Person",
             "name": "Percy"
         },
-        "headline": "Java的8中基本数据类型",
-        "image": "http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/DataType.png",
-        "keywords": "",
+        "headline": "Hibernate之CRUD与实例状态",
+        "image": "http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png",
+        "keywords": "ORM Hibernate",
         "genre": "日常技术 Java",
-        "datePublished": "2019-02-16",
-        "dateCreated": "2019-02-16",
-        "dateModified": "2019-02-17",
-        "url": "http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/",
-        "description": "一、什么是数据类型
-百度百科: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。
+        "datePublished": "2019-02-28",
+        "dateCreated": "2019-02-28",
+        "dateModified": "2019-03-01",
+        "url": "http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/",
+        "description": "
+在上一篇《初识Hibernate》中简单介绍了在Hibernate如何加载对象和持久化对象，以及Hibernate中对象实例状态。本文将继续介绍Hibernate简单的增删改查方法和对对象实例状态的理解（查询方法暂不提及）。
 "
-        "wordCount": 638
+        "wordCount": 1010
     }
 </script>
 
@@ -411,20 +378,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2019/02/17/枚举的使用示例/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            枚举的使用示例
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2019/01/27/初识Java多线程/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/02/27/初识Hibernate/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">初识Java多线程</p>
+        <p class="article-nav-title">初识Hibernate</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -439,7 +396,7 @@
     <h3 class="widget-title">目录</h3>
     <div class="widget">
         <div id="toc" class="toc-article">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、什么是数据类型"><span class="toc-number">1.</span> <span class="toc-text">一、什么是数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Java的基本数据类型"><span class="toc-number">2.</span> <span class="toc-text">二、Java的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、Java基本数据的大小，默认值和取值范围"><span class="toc-number">3.</span> <span class="toc-text">三、Java基本数据的大小，默认值和取值范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、IDEA中验证基本数据的大小，默认值和取值范围"><span class="toc-number">4.</span> <span class="toc-text">四、IDEA中验证基本数据的大小，默认值和取值范围</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、HibernateのCRUD操作"><span class="toc-number">1.</span> <span class="toc-text">一、HibernateのCRUD操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-HibernateのCreate"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 HibernateのCreate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-HibernateのRead"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 HibernateのRead</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-HibernateのUpdate"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 HibernateのUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-HibernateのDelete"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 HibernateのDelete</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-saveOrUpdate"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 saveOrUpdate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Hibernateの实例状态"><span class="toc-number">2.</span> <span class="toc-text">二、Hibernateの实例状态</span></a></li></ol>
         </div>
     </div>
 </div>
@@ -700,7 +657,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/';
+    var disqus_url = 'http://RainNenya.github.io/2019/02/28/Hibernate之CRUD与实例状态/';
     
     (function() {
     var dsq = document.createElement('script');
