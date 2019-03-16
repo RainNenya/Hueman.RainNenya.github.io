@@ -6,20 +6,26 @@
     
 
     
-    <title>分类: Java | RainNenya</title>
+    <title>Maven多模块之父子关系（继承关系） | RainNenya</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="RainNenya&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="RainNenya">
-<meta property="og:url" content="http://RainNenya.github.io/categories/日常技术/Java/page/2/index.html">
+        <meta name="keywords" content="Maven">
+    
+    <meta name="description" content="Maven多模块项目,适用于一些比较大的项目，通过合理的模块拆分，实现代码的复用，便于维护和管理。尤其是一些开源框架，也是采用多模块的方式，提供插件集成，用户可以根据需要配置指定的模块。">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven多模块之父子关系（继承关系）">
+<meta property="og:url" content="http://RainNenya.github.io/2019/03/14/Maven多模块之父子关系/index.html">
 <meta property="og:site_name" content="RainNenya">
-<meta property="og:description" content="RainNenya&apos;s blog">
+<meta property="og:description" content="Maven多模块项目,适用于一些比较大的项目，通过合理的模块拆分，实现代码的复用，便于维护和管理。尤其是一些开源框架，也是采用多模块的方式，提供插件集成，用户可以根据需要配置指定的模块。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://rainnenya.github.io/2019/03/14/Maven多模块之父子关系/maven-logo-black-on-white.png">
+<meta property="og:updated_time" content="2019-03-16T07:02:29.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RainNenya">
-<meta name="twitter:description" content="RainNenya&apos;s blog">
+<meta name="twitter:title" content="Maven多模块之父子关系（继承关系）">
+<meta name="twitter:description" content="Maven多模块项目,适用于一些比较大的项目，通过合理的模块拆分，实现代码的复用，便于维护和管理。尤其是一些开源框架，也是采用多模块的方式，提供插件集成，用户可以根据需要配置指定的模块。">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/03/14/Maven多模块之父子关系/maven-logo-black-on-white.png">
     
 
     
@@ -138,237 +144,219 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类: <em class="page-title-link">Java</em>
+    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Java/">Java</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-Maven多模块之父子关系" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/02/19/分页插件PageHelper/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2019/02/19/分页插件PageHelper/PageHelper.png)" alt="分页插件PageHelper" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://RainNenya.github.io/2019/02/19/分页插件PageHelper/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a>
-            </div>
-            <div class="date"><time datetime="2019-02-19T01:09:02.351Z" itemprop="datePublished">2019-02-19</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/02/19/分页插件PageHelper/">分页插件PageHelper</a>
+        Maven多模块之父子关系（继承关系）
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/03/14/Maven多模块之父子关系/" class="article-date">
+            <time datetime="2019-03-14T13:55:57.242Z" itemprop="datePublished">2019-03-14</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Maven/">Maven</a>
+    </div>
+
+				阅读数量:<span id="/2019/03/14/Maven多模块之父子关系/" class="leancloud_visitors" data-flag-title="Maven多模块之父子关系（继承关系）"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>Maven多模块项目,适用于一些比较大的项目，通过合理的模块拆分，实现代码的复用，便于维护和管理。尤其是一些开源框架，也是采用多模块的方式，提供插件集成，用户可以根据需要配置指定的模块。</p>
+</blockquote>
+<p><img src="/2019/03/14/Maven多模块之父子关系/maven-logo-black-on-white.png" alt="maven-logo"></p>
+<a id="more"></a>
+<h2 id="Maven多模块-pom"><a href="#Maven多模块-pom" class="headerlink" title="Maven多模块(pom)"></a>Maven多模块(pom)</h2><h3 id="1-1-父模块创建"><a href="#1-1-父模块创建" class="headerlink" title="1.1 父模块创建"></a>1.1 父模块创建</h3><p>先创建个简单的空的Maven Project作为父项目</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/parent_1.png" alt="父模块步骤1"></p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/parent_2.png" alt="父模块步骤2"></p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/parent_3.png" alt="父模块步骤3"></p>
+<h3 id="1-2-子模块创建"><a href="#1-2-子模块创建" class="headerlink" title="1.2 子模块创建"></a>1.2 子模块创建</h3><p>重新创建一个Maven Project作为子项目</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/child_1.png" alt="子模块步骤1"></p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/child_2.png" alt="子模块步骤2"></p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/child_3.png" alt="子模块步骤3"></p>
+<h3 id="1-3-父子模块-继承关系"><a href="#1-3-父子模块-继承关系" class="headerlink" title="1.3 父子模块(继承关系)"></a>1.3 父子模块(继承关系)</h3><p><strong>注意：此时父子模块为两个独立的项目。</strong></p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_1.png" alt="父子项目目录结构"></p>
+<p>步骤1：子项目中加入<code>&lt;parent&gt;</code>节点，传入父项目完整坐标。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_2.png" alt="父项目坐标"></p>
+<p>步骤2：将子项目中的依赖都注释掉。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_4.png" alt="注释子项目依赖"></p>
+<p>注意：此时子项目中的没有了Maven Dependencies。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_5.png" alt=""></p>
+<p>步骤3：将子项目注释的依赖添加到父项目中。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_6.png" alt="父项目添加依赖"></p>
+<p>注意：此时子项目中的依赖又添加回来了。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_1.png" alt="子项目的Maven Dependencies"></p>
+<blockquote>
+<p>这种直接在父工程中加入<code>&lt;dependencies&gt;</code>的方式，让子工程可以直接复用依赖，但是缺点是<strong>所有的子项目无条件继承父工程所有依赖</strong>，所以如果要在父工程中添加依赖只能针对非常通用的依赖。</p>
+</blockquote>
+<p>在父项目中再添加一个依赖。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_7.png" alt="父模块POM"></p>
+<p>子项目同时也继承了新添加的依赖。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_8.png" alt="子项目依赖"></p>
+<p>那如果不想无条件继承父工程的所有依赖，而想让子项目自行选择需要的依赖又该如何做呢？</p>
+<h3 id="1-4-dependencyManagement"><a href="#1-4-dependencyManagement" class="headerlink" title="1.4 dependencyManagement"></a>1.4 dependencyManagement</h3><blockquote>
+<p>在父项目中用<code>&lt;dependencies&gt;</code>节点包裹<code>&lt;dependencies&gt;</code>节点，并且添加的是<strong>完整的依赖坐标（gav）</strong>。</p>
+</blockquote>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_9.png" alt="dependencies"></p>
+<blockquote>
+<p>此时子项目中的Maven Dependencies又会消失，说明添加<code>&lt;dependencies&gt;</code>节点后，它并不负责相关依赖的下载。</p>
+</blockquote>
+<p>子项目加入相应同样依赖，注意不要加<code>version</code>（<code>version</code>继承自父项目），需要什么样的依赖就声明什么。</p>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_10.png" alt="子模块依赖"></p>
+<blockquote>
+<p>特别注意，如果父项目提供了<code>groupid</code>和<code>version</code>，则删除子项目坐标中的<code>groupid</code>和<code>version</code>，直接继承父项目相关坐标。</p>
+</blockquote>
+<p><img src="/2019/03/14/Maven多模块之父子关系/pc_3.png" alt="注释子项目节点"></p>
+<p><code>dependencyManagement</code>的作用：依赖版本管理器</p>
+<ol>
+<li>本身并不下载任何依赖，只是管理依赖的版本。依赖的下载依然需要单独的<code>&lt;dependencies&gt;</code>(不加<code>dependencyManagement</code>，额外写一个)去做</li>
+<li>如果<code>&lt;dependencies&gt;</code>中的<code>&lt;dependency&gt;</code>没有声明版本号(<code>version</code>)，maven会去寻找有无对应的<code>dependencyManagement</code>，当前工程没有就会向上找父工程。如果找到就以<code>dependencyManagement</code>中对应依赖声明的<code>version</code>为准，否则报错version is missing。</li>
+</ol>
+
+        </div>		
+        <footer class="article-footer">
+			<!-- ������City�氲װ���� -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MjY2MS8xOTIwOA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Ϊ����ʹ�����������۹����뼤��JavaScript</noscript>
+</div>
+<!-- City�氲װ��������� -->
             
-如果你也在用 MyBatis，建议尝试该分页插件，这一定是最方便使用的分页插件。分页插件支持任何复杂的单表、多表分页。
 
 
 
-PageHelper是一个Mybatis的分页插件, 负责将已经写好的sql语句, 进行分页加工.
+    <a data-url="http://RainNenya.github.io/2019/03/14/Maven多模块之父子关系/" data-id="cjtb5euvz0009cso0wy7kkr9x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-        </p>
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Percy"
+        },
+        "headline": "Maven多模块之父子关系（继承关系）",
+        "image": "http://RainNenya.github.io/2019/03/14/Maven多模块之父子关系/maven-logo-black-on-white.png",
+        "keywords": "Maven",
+        "genre": "日常技术 Java",
+        "datePublished": "2019-03-14",
+        "dateCreated": "2019-03-14",
+        "dateModified": "2019-03-16",
+        "url": "http://RainNenya.github.io/2019/03/14/Maven多模块之父子关系/",
+        "description": "
+Maven多模块项目,适用于一些比较大的项目，通过合理的模块拆分，实现代码的复用，便于维护和管理。尤其是一些开源框架，也是采用多模块的方式，提供插件集成，用户可以根据需要配置指定的模块。
+
+"
+        "wordCount": 73
+    }
+</script>
+
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/02/17/枚举的使用示例/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2019/02/17/枚举的使用示例/enum.png)" alt="枚举的使用示例" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://RainNenya.github.io/2019/02/17/枚举的使用示例/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a>
-            </div>
-            <div class="date"><time datetime="2019-02-17T03:46:25.562Z" itemprop="datePublished">2019-02-17</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/02/17/枚举的使用示例/">枚举的使用示例</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-一、枚举的创建（以性别为例）
-枚举的创建包含数字型的状态码和与之对应的字符串型的消息（类似于HTTP响应中的响应码和响应消息）。
-
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
 
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/02/16/Java的8中基本数据类型/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2019/02/16/Java的8中基本数据类型/DataType.png)" alt="Java的8中基本数据类型" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://RainNenya.github.io/2019/02/16/Java的8中基本数据类型/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a>
-            </div>
-            <div class="date"><time datetime="2019-02-16T06:07:03.084Z" itemprop="datePublished">2019-02-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/02/16/Java的8中基本数据类型/">Java的8中基本数据类型</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            一、什么是数据类型
-百度百科: 数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作。变在声明变量时也可指定它的数据类型。所有变量都具有数据类型，以决定能够存储哪种数据。所以，通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/01/27/初识Java多线程/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1068231934,3527046056&amp;fm=26&amp;gp=0.jpg)" alt="初识Java多线程" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://RainNenya.github.io/2019/01/27/初识Java多线程/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a>
-            </div>
-            <div class="date"><time datetime="2019-01-27T13:40:00.203Z" itemprop="datePublished">2019-01-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/01/27/初识Java多线程/">初识Java多线程</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            一、程序、进程、线程の概念
-1、程序：利用编程语言开发的一个工具软件， 静态的，在没有启动运行之前只是磁盘中的一个普通文件。
-2、进程: 程序启动之后就变成了进程，进程是在内存中运行的，具有一定的生命周期，如果程序运行解析，进程在内存中就会回收，生命周期也就结束了，当然程序是可以再次运行，重写变成进程。
-3、线程：进程在运行过程中的执行走向，线索。线程是比进程更小的一个单位，一个进程可以有一个或多个线程的。
-
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">第 2 页，共 2 页</span>
-        <a class="extend prev" rel="prev" href="/categories/日常技术/Java/">&laquo;</a><a class="page-number" href="/categories/日常技术/Java/">1</a><span class="page-number current">2</span>
-    </nav>
-
+    </section>
 
 
                         </div>
@@ -398,10 +386,32 @@ PageHelper是一个Mybatis的分页插件, 负责将已经写好的sql语句, �
         </ul>
     </div>
     
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/02/28/Hibernate之CRUD与实例状态/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Hibernate之CRUD与实例状态</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
     <div class="widgets-container">
         
             
                 
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven多模块-pom"><span class="toc-number">1.</span> <span class="toc-text">Maven多模块(pom)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-父模块创建"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 父模块创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-子模块创建"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 子模块创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-父子模块-继承关系"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 父子模块(继承关系)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-dependencyManagement"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 dependencyManagement</span></a></li></ol></li></ol>
+        </div>
+    </div>
+</div>
+
 
             
                 
@@ -658,11 +668,13 @@ PageHelper是一个Mybatis的分页插件, 负责将已经写好的sql语句, �
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://RainNenya.github.io/2019/03/14/Maven多模块之父子关系/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
