@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>ControllerAdvice拦截器 | RainNenya</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Spring,SpringBoot">
+    
+    <meta name="description" content="Spring3.2开始提供的新注解，控制器增强（AOP），最主要的应用是做统一的异常处理。@ControllerAdvice（看成spring mvc提供的一个特殊的拦截器）。@ControllerAdvice是一个@Component，用于定义@ExceptionHandler（最主要用途），@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMappin">
+<meta name="keywords" content="Spring,SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ControllerAdvice拦截器">
+<meta property="og:url" content="http://RainNenya.github.io/2019/03/20/ControllerAdvice拦截器/index.html">
+<meta property="og:site_name" content="RainNenya">
+<meta property="og:description" content="Spring3.2开始提供的新注解，控制器增强（AOP），最主要的应用是做统一的异常处理。@ControllerAdvice（看成spring mvc提供的一个特殊的拦截器）。@ControllerAdvice是一个@Component，用于定义@ExceptionHandler（最主要用途），@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMappin">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://rainnenya.github.io/2019/03/20/ControllerAdvice拦截器/Spring.jpg">
+<meta property="og:updated_time" content="2019-03-20T06:40:22.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ControllerAdvice拦截器">
+<meta name="twitter:description" content="Spring3.2开始提供的新注解，控制器增强（AOP），最主要的应用是做统一的异常处理。@ControllerAdvice（看成spring mvc提供的一个特殊的拦截器）。@ControllerAdvice是一个@Component，用于定义@ExceptionHandler（最主要用途），@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMappin">
+<meta name="twitter:image" content="http://rainnenya.github.io/2019/03/20/ControllerAdvice拦截器/Spring.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RainNenya" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?adc2a5395e377d9f9eac2222ebfe460c";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Java/">Java</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Java/">Java</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ControllerAdvice拦截器" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ControllerAdvice拦截器
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/03/20/ControllerAdvice拦截器/" class="article-date">
+            <time datetime="2019-03-20T03:25:38.732Z" itemprop="datePublished">2019-03-20</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/SpringBoot/">SpringBoot</a>
+    </div>
+
+				阅读数量:<span id="/2019/03/20/ControllerAdvice拦截器/" class="leancloud_visitors" data-flag-title="ControllerAdvice拦截器"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>Spring3.2开始提供的新注解，控制器增强（AOP），最主要的应用是做统一的异常处理。<code>@ControllerAdvice</code>（看成spring mvc提供的一个特殊的拦截器）。<br><code>@ControllerAdvice</code>是一个<code>@Component</code>，用于定义<code>@ExceptionHandler</code>（最主要用途），<code>@InitBinder</code>和<code>@ModelAttribute</code>方法，适用于所有使用<code>@RequestMapping</code>方法（拦截）。</p>
+</blockquote>
+<p>引申：<code>@interface</code> 元注解<br><code>@Target(ElementType.TYPE)</code> ：该注解应用到什么地方。<br><code>@Retention(RetentionPolicy.RUNTIME)</code>：什么时候应用。</p>
+<p><code>@ExceptionHandler</code>：为所有controller封装统一异常处理代码。<br><code>@ModelAttribute</code>：为所有controller设置全局变量。<br><code>@InitBinder</code>：用于为所有controller设置某个类型的数据转换器。</p>
+<p><img src="/2019/03/20/ControllerAdvice拦截器/Spring.jpg" alt="Spring"></p>
+<a id="more"></a>
+<p>准备：搭建好Spring Boot，页面使用thymeleaf</p>
+<h3 id="1-全局异常捕捉处理"><a href="#1-全局异常捕捉处理" class="headerlink" title="1.全局异常捕捉处理"></a>1.全局异常捕捉处理</h3><p>ControllerAdviceTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 启动应用后，被 <span class="doctag">@ExceptionHandler</span>、<span class="doctag">@InitBinder</span>、<span class="doctag">@ModelAttribute</span> 注解的方法，</span></span><br><span class="line"><span class="comment"> * 都会作用在 被 <span class="doctag">@RequestMapping</span> 注解的方法上</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerAdviceTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 全局异常捕捉处理</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ExceptionHandler</span> 用来定义函数针对的异常类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map <span class="title">errorHandler</span><span class="params">(Exception ex)</span></span>&#123;</span><br><span class="line">        Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="string">"code"</span>,<span class="string">"0000"</span>);</span><br><span class="line">        map.put(<span class="string">"msg"</span>,ex.getMessage());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ExceptionController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"exception1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">exception1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"拦截器测试"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/exception1</p>
+<p>浏览器显示：拦截器测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"exception2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">exception2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"拦截器测试"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/exception2</p>
+<p>浏览器显示：{“msg”:”/ by zero”,”code”:”0000”}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"exception3"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">exception3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"服务器到非洲去了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/exception3</p>
+<p>浏览器显示：{“msg”:”服务器到非洲去了”,”code”:”0000”}</p>
+<h3 id="2-拦截捕捉自定义异常"><a href="#2-拦截捕捉自定义异常" class="headerlink" title="2.拦截捕捉自定义异常"></a>2.拦截捕捉自定义异常</h3><p>MyException.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line">	<span class="comment">//Get、Set方法略……</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String code,String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ControllerAdviceTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerAdviceTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 拦截捕捉自定义异常 MyException.class</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = MyException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map <span class="title">myErrorHandler</span><span class="params">(MyException ex)</span> </span>&#123;</span><br><span class="line">        Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="string">"code"</span>, ex.getCode());</span><br><span class="line">        map.put(<span class="string">"msg"</span>, ex.getMsg());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ExceptionController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"myException"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">myException</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> MyException(<span class="string">"1111"</span>,<span class="string">"This is my Exception!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/myException</p>
+<p>浏览器显示：{“msg”:”This is my Exception!”,”code”:”1111”}</p>
+<hr>
+<p>跳转到一个单独的异常显示页面</p>
+<p>ControllerAdviceTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerAdviceTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 跳转视图显示异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = MyException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">myErrorHandlerToView</span><span class="params">(MyException ex)</span> </span>&#123;</span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        modelAndView.setViewName(<span class="string">"myGlobalExceptionPage"</span>);</span><br><span class="line">        modelAndView.addObject(<span class="string">"code"</span>, ex.getCode());</span><br><span class="line">        modelAndView.addObject(<span class="string">"msg"</span>, ex.getMsg());</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>myGlobalExceptionPage.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>myGlobalExceptionPage<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;code&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;msg&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/myException</p>
+<p>浏览器显示：1111    This is my Exception!</p>
+<h3 id="3-绑定值到Model中"><a href="#3-绑定值到Model中" class="headerlink" title="3.绑定值到Model中"></a>3.绑定值到Model中</h3><p>ControllerAdviceTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerAdviceTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 把值绑定到Model中，使全局<span class="doctag">@RequestMapping</span>可以获取到该值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ModelAttribute</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addAttributes</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"添加全局变量"</span>);</span><br><span class="line">        model.addAttribute(<span class="string">"userName"</span>, <span class="string">"Jack"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ExceptionController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 使用注入的ModelMap来取变量</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> modelMap</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"modelMapTest1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">modelMapTest1</span><span class="params">(ModelMap modelMap)</span></span>&#123;</span><br><span class="line">        Object globalVal = modelMap.get(<span class="string">"userName"</span>);</span><br><span class="line">        System.out.println(<span class="string">"全局变量为："</span>+globalVal);</span><br><span class="line">        <span class="keyword">return</span> globalVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/modelMapTest1</p>
+<p>控制台输出：添加全局变量    全局变量为：Jack</p>
+<p>浏览器显示：Jack</p>
+<hr>
+<p>ExceptionController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 也可以使用<span class="doctag">@ModelAttribute</span>注解来取变量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> globalVal</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/modelMapTest2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">modelMapTest2</span><span class="params">(@ModelAttribute(<span class="string">"userName"</span>)</span> String globalVal) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"全局变量为："</span>+globalVal);</span><br><span class="line">        <span class="keyword">return</span> globalVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/modelMapTest2</p>
+<p>控制台输出：添加全局变量    全局变量为：Jack</p>
+<p>浏览器显示：Jack</p>
+<h3 id="4-转换日期格式"><a href="#4-转换日期格式" class="headerlink" title="4.转换日期格式"></a>4.转换日期格式</h3><p>ControllerAdviceTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerAdviceTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 应用到所有<span class="doctag">@RequestMapping</span>注解方法，在其执行之前初始化数据绑定器</span></span><br><span class="line"><span class="comment">     * WebDataBinder是用来绑定请求参数到指定的属性编辑器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> binder</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@InitBinder</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initBinder</span><span class="params">(WebDataBinder binder)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"initBinder执行"</span>);</span><br><span class="line">        SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">        dateFormat.setLenient(<span class="keyword">false</span>);  <span class="comment">//日期格式是否宽容（只能判断是否需要跳到下个月去）</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * spring mvc在绑定表单之前，都会先注册这些编辑器，</span></span><br><span class="line"><span class="comment">         * Spring自己提供了大量的实现类，诸如CustomDateEditor,CustomBooleanEditor,CustomNumberEditor等</span></span><br><span class="line"><span class="comment">         * 使用时候调用WebDataBinder的registerCustomEditor方法注册</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        binder.registerCustomEditor(Date.class, <span class="keyword">new</span> CustomDateEditor(dateFormat,<span class="keyword">false</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ExceptionController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/date"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">index</span><span class="params">(Date date)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"date="</span>+date);</span><br><span class="line">        <span class="keyword">return</span> date;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：localhost:8080/date?date=2019-3-20</p>
+<p>控制台输出：initBinder执行    date=2019-3-20</p>
+<p>浏览器显示：”2019-3-20”</p>
+
+        </div>		
+        <footer class="article-footer">
+			<!-- ������City�氲װ���� -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MjY2MS8xOTIwOA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Ϊ����ʹ�����������۹����뼤��JavaScript</noscript>
+</div>
+<!-- City�氲װ��������� -->
+            
+
+
+
+    <a data-url="http://RainNenya.github.io/2019/03/20/ControllerAdvice拦截器/" data-id="cjtgua0cj0000vco0tkmjaqqp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Percy"
+        },
+        "headline": "ControllerAdvice拦截器",
+        "image": "http://RainNenya.github.io/2019/03/20/ControllerAdvice拦截器/Spring.jpg",
+        "keywords": "Spring SpringBoot",
+        "genre": "日常技术 Java",
+        "datePublished": "2019-03-20",
+        "dateCreated": "2019-03-20",
+        "dateModified": "2019-03-20",
+        "url": "http://RainNenya.github.io/2019/03/20/ControllerAdvice拦截器/",
+        "description": "
+Spring3.2开始提供的新注解，控制器增强（AOP），最主要的应用是做统一的异常处理。@ControllerAdvice（看成spring mvc提供的一个特殊的拦截器）。@ControllerAdvice是一个@Component，用于定义@ExceptionHandler（最主要用途），@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMapping方法（拦截）。
+
+引申：@interface 元注解@Target(ElementType.TYPE) ：该注解应用到什么地方。@Retention(RetentionPolicy.RUNTIME)：什么时候应用。
+@ExceptionHandler：为所有controller封装统一异常处理代码。@ModelAttribute：为所有controller设置全局变量。@InitBinder：用于为所有controller设置某个类型的数据转换器。
+"
+        "wordCount": 1586
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/RainNenya" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/03/14/Maven多模块之父子关系/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Maven多模块之父子关系（继承关系）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-全局异常捕捉处理"><span class="toc-number">1.</span> <span class="toc-text">1.全局异常捕捉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-拦截捕捉自定义异常"><span class="toc-number">2.</span> <span class="toc-text">2.拦截捕捉自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绑定值到Model中"><span class="toc-number">3.</span> <span class="toc-text">3.绑定值到Model中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-转换日期格式"><span class="toc-number">4.</span> <span class="toc-text">4.转换日期格式</span></a></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/ControllerAdvice拦截器/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/03/20/ControllerAdvice拦截器/Spring.jpg)" alt="ControllerAdvice拦截器" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/03/20/ControllerAdvice拦截器/" class="title">ControllerAdvice拦截器</a></p>
+                            <p class="item-date"><time datetime="2019-03-20T03:25:38.732Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/14/Maven多模块之父子关系/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/03/14/Maven多模块之父子关系/maven-logo-black-on-white.png)" alt="Maven多模块之父子关系（继承关系）" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/03/14/Maven多模块之父子关系/" class="title">Maven多模块之父子关系（继承关系）</a></p>
+                            <p class="item-date"><time datetime="2019-03-14T13:55:57.242Z" itemprop="datePublished">2019-03-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/28/Hibernate之CRUD与实例状态/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/28/Hibernate之CRUD与实例状态/hibernate_state.png)" alt="Hibernate之CRUD与实例状态" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/28/Hibernate之CRUD与实例状态/" class="title">Hibernate之CRUD与实例状态</a></p>
+                            <p class="item-date"><time datetime="2019-02-28T02:22:48.528Z" itemprop="datePublished">2019-02-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/27/初识Hibernate/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/27/初识Hibernate/hibernate_logo.png)" alt="初识Hibernate" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/27/初识Hibernate/" class="title">初识Hibernate</a></p>
+                            <p class="item-date"><time datetime="2019-02-27T03:27:00.823Z" itemprop="datePublished">2019-02-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/25/SpringMVC接收和响应json数据/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/25/SpringMVC接收和响应json数据/SpringMVC.jpg)" alt="SpringMVC接收和响应json数据" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/日常技术/Java/">Java</a></p>
+                            <p class="item-title"><a href="/2019/02/25/SpringMVC接收和响应json数据/" class="title">SpringMVC接收和响应json数据</a></p>
+                            <p class="item-date"><time datetime="2019-02-25T15:18:44.441Z" itemprop="datePublished">2019-02-25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Java/">Java</a><span class="category-list-count">10</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORM/">ORM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enumeration/">enumeration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/">multithreading</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hibernate/" style="font-size: 15px;">Hibernate</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/ORM/" style="font-size: 15px;">ORM</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 15px;">SpringMVC</a> <a href="/tags/enumeration/" style="font-size: 10px;">enumeration</a> <a href="/tags/multithreading/" style="font-size: 10px;">multithreading</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+	    <!--����������Ҫд������-->
+			<p>Jaberrwock123@163.com</p>
+        </div>
+    </div>
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 Percy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+				<!--这一段是不蒜子的访问量统计代码-->
+				<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+				<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+				<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'pm9u6h9hfnT5JN9NSeMz6rL6-gzGzoHsz';
+    var APP_KEY = 'Wm7UyiX8pKMulgaoBRi164yd';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://RainNenya.github.io/2019/03/20/ControllerAdvice拦截器/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
